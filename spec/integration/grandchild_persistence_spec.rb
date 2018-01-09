@@ -40,6 +40,10 @@ describe 'Grandchild persistence' do
 
     it { is_expected.to be_persisted }
 
+    it 'has label' do
+      expect(subject.label).to eq(a.label)
+    end
+
     describe 'child' do
       subject { DummyResourceA.new(a.id).has_resource }
 
@@ -47,6 +51,10 @@ describe 'Grandchild persistence' do
 
       it 'is persisted' do
         expect(subject.first).to be_persisted
+      end
+
+      it 'has label' do
+        expect(subject.first.label).to eq(b.label)
       end
     end
 
@@ -58,6 +66,10 @@ describe 'Grandchild persistence' do
       it 'is persisted' do
         expect(subject.first).to be_persisted
       end
+
+      it 'has label' do
+        expect(subject.first.label).to eq(c.label)
+      end
     end
   end
 
@@ -65,6 +77,10 @@ describe 'Grandchild persistence' do
     subject { DummyResourceB.new(b.id) }
 
     it { is_expected.to be_persisted }
+
+    it 'has label' do
+      expect(subject.label).to eq(b.label)
+    end
 
     it 'has grandchild resource' do
       expect(subject.has_resource).to eq([c])
@@ -75,5 +91,9 @@ describe 'Grandchild persistence' do
     subject { DummyResourceC.new(c.id) }
 
     it { is_expected.to be_persisted }
+
+    it 'has label' do
+      expect(subject.label).to eq(c.label)
+    end
   end
 end
